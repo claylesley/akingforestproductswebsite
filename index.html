@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A. King Forest Products, LLC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0F1117;--ink2:#181B23;--grain:#F7F3EE;
+  --amber:#E8A020;--amberd:#C4881A;
+  --forest:#1A2E1C;--forest2:#233D25;--forestl:#2C4A2E;
+  --em:#2D4A1E;--eml:#3D6028;--emaccent:#7DB543;
+  --smoke:#D8D4CE;--mid:#6B6660;--nh:64px
+}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--grain);color:var(--ink);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;background:none;border:none;padding:0;line-height:inherit}
+
+/* PAGE SYSTEM */
+.page{display:none}
+.page.active{display:block;animation:fadeUp .3s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nh);background:var(--forest);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1rem,5vw,4rem);border-bottom:1px solid rgba(125,181,67,.18)}
+.nl{display:flex;align-items:center;cursor:pointer;gap:10px;height:var(--nh)}
+.nl img{height:52px;width:auto;object-fit:contain;background:#F7F3EE;border-radius:8px;padding:3px 5px}
+.nl-lockup{display:flex;flex-direction:column;gap:1px}
+.nl-main{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.88rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grain)}
+.nl-main span{color:var(--amber)}
+.nl-sub{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,238,.38)}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+.nav-link{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.77rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,243,238,.52);transition:color .2s}
+.nav-link:hover,.nav-link.act{color:var(--amber)}
+.n-cta{background:var(--amber)!important;color:var(--ink)!important;padding:8px 18px!important;border-radius:2px;font-weight:700!important}
+.n-cta:hover{background:var(--amberd)!important;color:var(--ink)!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:24px;height:2px;background:var(--grain);transition:all .2s}
+
+/* MOBILE MENU */
+#mm{display:none;position:fixed;inset:0;background:var(--forest);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding-top:var(--nh)}
+#mm.open{display:flex}
+.ml{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,243,238,.7);transition:color .2s}
+.ml:hover{color:var(--amber)}
+.ml-div{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(247,243,238,.25);margin-top:.25rem}
+
+/* LIGHTBOX */
+#lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:500;align-items:center;justify-content:center;cursor:zoom-out}
+#lb.open{display:flex}
+#lb img{max-width:90vw;max-height:90vh;object-fit:contain;pointer-events:none}
+.lb-x{position:absolute;top:1.25rem;right:1.75rem;background:none;border:none;color:rgba(255,255,255,.65);font-size:2.2rem;line-height:1;cursor:pointer;padding:4px;transition:color .2s;z-index:1}
+.lb-x:hover{color:var(--amber)}
+
+/* BUTTONS */
+.btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;padding:14px 32px;border-radius:2px;display:inline-block;cursor:pointer;border:none;transition:background .2s,border-color .2s,color .2s,transform .15s;line-height:1.2}
+.btn-a{background:var(--amber);color:var(--ink)}
+.btn-a:hover{background:var(--amberd);transform:translateY(-1px)}
+.btn-g{background:var(--forestl);color:var(--grain)}
+.btn-g:hover{background:var(--forest2);transform:translateY(-1px)}
+.btn-b{background:transparent;color:var(--grain);border:1px solid rgba(247,243,238,.28)}
+.btn-b:hover{border-color:var(--amber);color:var(--amber)}
+.btn-em{background:var(--emaccent);color:#fff}
+.btn-em:hover{background:#6aa336}
+
+/* ── HOME HERO (A. King Forest Products) ── */
+.hero-kfp{
+  min-height:100vh;
+  background:linear-gradient(110deg,rgba(20,38,22,.97) 38%,rgba(20,38,22,.6) 100%),
+    url('images/lumber/lumber-13.jpg') center/cover no-repeat;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:calc(var(--nh)+5rem) clamp(1.5rem,8vw,8rem) clamp(4rem,6vw,6rem);
+  position:relative;overflow:hidden
+}
+.grain-svg{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-kfp>*:not(.grain-svg){position:relative;z-index:1}
+.ey{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--emaccent);display:flex;align-items:center;gap:14px;margin-bottom:1.5rem}
+.ey::before{content:'';width:36px;height:2px;background:var(--emaccent);flex-shrink:0}
+.kfp-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(3.5rem,11vw,10rem);line-height:.9;letter-spacing:-.015em;text-transform:uppercase;color:var(--grain);margin-bottom:2rem}
+.kfp-h1 .am{color:var(--amber)}
+
+.h-sub{font-size:clamp(.95rem,1.6vw,1.1rem);line-height:1.7;color:rgba(247,243,238,.52);max-width:500px;margin-bottom:2.5rem}
+.h-btns{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* STATS BAR */
+.sb{background:var(--amber);display:flex;align-items:stretch}
+.si{flex:1;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;border-right:1px solid rgba(15,17,23,.12)}
+.si:last-child{border-right:none}
+.sn{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.2rem,2.8vw,2rem);color:var(--ink);line-height:1;letter-spacing:-.02em}
+.sl{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(15,17,23,.6)}
+
+/* DIVISION CARDS (home page) */
+.div-cards{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.div-card{position:relative;min-height:520px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;padding:3rem clamp(2rem,5vw,4rem);border:none;text-align:left;width:100%}
+.div-card img.div-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.div-card:hover img.div-bg{transform:scale(1.04)}
+.div-card-overlay{position:absolute;inset:0;transition:opacity .3s}
+.div-card-kp .div-card-overlay{background:linear-gradient(to top,rgba(15,17,23,.95) 0%,rgba(15,17,23,.3) 70%)}
+.div-card-em .div-card-overlay{background:linear-gradient(to top,rgba(26,46,18,.95) 0%,rgba(26,46,18,.3) 70%)}
+.div-card:hover .div-card-overlay{opacity:.85}
+.div-card-content{position:relative;z-index:1}
+.div-badge{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:4px 10px;border-radius:1px;margin-bottom:1rem}
+.div-badge-kp{background:var(--amber);color:var(--ink)}
+.div-badge-em{background:var(--emaccent);color:#fff}
+.div-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4.5vw,3.2rem);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;color:var(--grain);margin-bottom:.85rem}
+.div-desc{font-size:.95rem;line-height:1.65;color:rgba(247,243,238,.6);max-width:420px;margin-bottom:1.5rem}
+.div-link{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.div-link-kp{color:var(--amber)}
+.div-link-em{color:var(--emaccent)}
+.div-link::after{content:'→'}
+.div-card:hover .div-link{gap:14px}
+.div-divider{display:none}
+
+/* ABOUT STRIP */
+.about-strip{background:var(--forest);padding:clamp(3rem,6vw,5rem) clamp(1.5rem,8vw,8rem);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(125,181,67,.7);margin-bottom:.85rem}
+.about-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1;text-transform:uppercase;color:var(--grain);margin-bottom:1.25rem}
+.about-body{font-size:.975rem;line-height:1.75;color:rgba(247,243,238,.5)}
+.about-details{display:flex;flex-direction:column;gap:1rem}
+.about-detail{display:flex;align-items:flex-start;gap:12px;padding:1rem 1.25rem;background:rgba(255,255,255,.04);border-left:2px solid rgba(125,181,67,.3);border-radius:1px}
+.about-detail-ico{width:18px;height:18px;color:var(--emaccent);flex-shrink:0;margin-top:2px}
+.about-detail-txt{font-size:.875rem;line-height:1.55;color:rgba(247,243,238,.55)}
+.about-detail-txt strong{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--grain);display:block;margin-bottom:2px}
+
+/* SHARED SECTION */
+.sec{padding:clamp(4rem,7vw,6rem) clamp(1.5rem,8vw,8rem)}
+.sec-ey{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:.85rem}
+.sec-ey::before{content:'';width:22px;height:2px;background:var(--amber);flex-shrink:0}
+.sec-ey.green{color:var(--emaccent)}.sec-ey.green::before{background:var(--emaccent)}
+.sec-t{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1;letter-spacing:-.01em;text-transform:uppercase;color:var(--ink);margin-bottom:1rem}
+.sec-b{font-size:1rem;line-height:1.75;color:var(--mid);max-width:560px;margin-bottom:2.5rem}
+
+/* SERVICES GRID (King Pallet) */
+.svc-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--smoke);border:1px solid var(--smoke)}
+.sc{background:var(--grain);padding:1.85rem 1.5rem 2rem;transition:background .2s;position:relative;overflow:hidden;cursor:pointer;text-align:left;width:100%}
+.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.sc:hover{background:#F0EBE3}.sc:hover::after{transform:scaleX(1)}
+.sc-ico{width:36px;height:36px;margin-bottom:1rem;color:var(--amber)}
+.sc-n{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.03em;text-transform:uppercase;color:var(--ink);margin-bottom:.55rem}
+.sc-d{font-size:.85rem;line-height:1.65;color:var(--mid)}
+
+/* FEATURED PHOTOS */
+.feat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--smoke)}
+.feat-g5{grid-template-columns:repeat(6,1fr)}.feat-g5 .fc{grid-column:span 2}.feat-g5 .fc:nth-child(n+4){grid-column:span 3}
+@media(max-width:900px){.feat-g5{grid-template-columns:1fr 1fr}.feat-g5 .fc,.feat-g5 .fc:nth-child(n+4){grid-column:auto}.feat-g5 .fc:last-child{grid-column:1/-1;aspect-ratio:8/3}}
+@media(max-width:560px){.feat-g5{grid-template-columns:1fr}.feat-g5 .fc:last-child{aspect-ratio:4/3}}
+.fc{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:pointer;background:var(--ink2);display:block;width:100%;border:none;padding:0;text-align:left}
+.fc img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.fc:hover img{transform:scale(1.06)}
+.fo{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,17,23,.88) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;transition:background .3s}
+.fc:hover .fo{background:linear-gradient(to top,rgba(15,17,23,.93) 0%,rgba(15,17,23,.18) 70%)}
+.flab{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
+.flab.green{color:var(--emaccent)}
+.ftit{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:.02em;text-transform:uppercase;color:var(--grain);margin-bottom:8px}
+.flink{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(247,243,238,.55);display:flex;align-items:center;gap:6px;transition:color .2s}
+.flink::after{content:'→'}
+.fc:hover .flink{color:var(--amber)}
+
+/* CERT BAND */
+.cb{background:var(--forestl);padding:2.25rem clamp(1.5rem,8vw,8rem);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.cb-c{display:flex;align-items:center;gap:1.5rem}
+.cb-ico{width:48px;height:48px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(255,255,255,.18)}
+.cb-t{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;letter-spacing:.04em;text-transform:uppercase;color:var(--grain)}
+.cb-s{font-size:.83rem;color:rgba(247,243,238,.58);margin-top:2px}
+
+/* KING PALLET CO. SUB-NAV */
+.kp-sub-nav{background:var(--ink2);padding:0 clamp(1.5rem,8vw,8rem);display:flex;border-bottom:1px solid rgba(232,160,32,.12);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ksn{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,243,238,.38);padding:1rem 1.5rem 1rem 0;margin-right:.5rem;border-bottom:2px solid transparent;border-top:2px solid transparent;transition:color .2s,border-bottom-color .2s;white-space:nowrap}
+.ksn:hover{color:rgba(247,243,238,.75)}
+.ksn.act{color:var(--amber);border-bottom-color:var(--amber)}
+
+/* INNER PAGE HEADER */
+.pgh{background:var(--ink);padding:calc(var(--nh) + 3.5rem) clamp(1.5rem,8vw,8rem) 3rem;position:relative;overflow:hidden}
+.pgh>*:not(.grain-svg){position:relative;z-index:1}
+.pgh.forest-hd{background:var(--forest)}
+.pgbc{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,238,.3);margin-bottom:1rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pgbc-btn{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,238,.3);cursor:pointer;transition:color .2s}
+.pgbc-btn:hover{color:var(--amber)}
+.pgbc-sep{opacity:.4}
+.pgt{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.8rem,8vw,5.5rem);line-height:.92;letter-spacing:-.01em;text-transform:uppercase;color:var(--grain);margin-bottom:.5rem}
+.pgt-sub{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:clamp(.9rem,1.8vw,1.1rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(247,243,238,.3);margin-bottom:1.1rem}
+.pgd{font-size:.975rem;line-height:1.7;color:rgba(247,243,238,.47);max-width:540px}
+
+/* GALLERY */
+.gal-sec{padding:clamp(2.5rem,4vw,4rem) clamp(1.5rem,8vw,8rem)}
+.gal-g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.gal-g.c3{grid-template-columns:repeat(3,1fr)}
+.gal-g.c2{grid-template-columns:repeat(2,1fr)}
+.gi{aspect-ratio:4/3;overflow:hidden;background:var(--ink2);cursor:zoom-in;position:relative;border:none;padding:0;display:block;width:100%}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.gi:hover img{transform:scale(1.05)}
+.go{position:absolute;inset:0;background:rgba(15,17,23,0);transition:background .3s;pointer-events:none}
+.gi:hover .go{background:rgba(232,160,32,.1)}
+
+/* PAGE CTA */
+.pg-cta{background:var(--ink2);padding:3rem clamp(1.5rem,8vw,8rem);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.pct{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.4rem,2.5vw,1.9rem);letter-spacing:.01em;text-transform:uppercase;color:var(--grain)}
+.pcs{font-size:.9rem;color:rgba(247,243,238,.42);margin-top:4px}
+
+/* ENVIROMULCH PRODUCTS */
+.em-hero{min-height:50vh;background:linear-gradient(110deg,rgba(26,46,18,.96) 30%,rgba(26,46,18,.55) 60%,rgba(26,46,18,.25) 100%),url('images/enviromulch/enviromulch-hero.jpg') 80% 60%/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--nh)+4rem) clamp(1.5rem,8vw,8rem) 3.5rem;position:relative;overflow:hidden}
+.em-hero>*:not(.grain-svg){position:relative;z-index:1}
+.em-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.em-card{background:#fff;border:1px solid var(--smoke);border-top:3px solid var(--emaccent);padding:1.5rem 1.5rem 1.75rem;border-radius:2px}
+.em-card-ico{width:32px;height:32px;margin-bottom:1rem;color:var(--eml)}
+.em-card-n{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);margin-bottom:.5rem}
+.em-card-d{font-size:.855rem;line-height:1.65;color:var(--mid)}
+.em-cta-band{background:var(--em);padding:2.5rem clamp(1.5rem,8vw,8rem);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.em-cta-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);text-transform:uppercase;color:var(--grain)}
+.em-cta-sub{font-size:.9rem;color:rgba(247,243,238,.5);margin-top:4px}
+
+/* CONTACT */
+.cog{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem}
+.ccard{background:#fff;border:1px solid var(--smoke);padding:2.5rem 2rem;border-radius:2px}
+.cct{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--amber)}
+.cl{display:flex;align-items:flex-start;gap:12px;margin-bottom:1.1rem}
+.ci{width:20px;height:20px;color:var(--amber);flex-shrink:0;margin-top:2px}
+.cv{font-size:1rem;line-height:1.55;color:var(--ink)}
+.cv strong{font-weight:600;display:block;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-bottom:2px}
+.cv a{color:var(--amber)}.cv a:hover{text-decoration:underline}
+.icard{background:var(--forest);padding:2rem 1.75rem;border-radius:2px;display:flex;flex-direction:column;gap:.85rem;margin-bottom:1rem}
+.ict{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--emaccent)}
+.icd{font-size:.875rem;line-height:1.65;color:rgba(247,243,238,.5)}
+
+/* QUOTE FORM */
+.qg{display:grid;grid-template-columns:2fr 1fr;gap:3rem;align-items:start}
+.fw{background:#fff;border:1px solid var(--smoke);padding:2.5rem;border-radius:2px}
+.fst{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin:2rem 0 1.1rem;padding-top:1.75rem;border-top:1px solid var(--smoke)}
+.fst:first-child{margin-top:0;padding-top:0;border-top:none}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.fr.s{grid-template-columns:1fr}.fr.t{grid-template-columns:1fr 1fr 1fr}
+.fg{display:flex;flex-direction:column;gap:4px}
+.flb{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.fi,.fsel,.fta{padding:10px 14px;border:1px solid var(--smoke);background:var(--grain);color:var(--ink);font-family:'Barlow',sans-serif;font-size:.93rem;border-radius:2px;outline:none;transition:border-color .2s;width:100%}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--amber)}
+.fta{resize:vertical;min-height:100px}
+.rg{display:flex;gap:.9rem;flex-wrap:wrap;padding-top:4px}
+.rl{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:.88rem}
+.rl input{accent-color:var(--amber);width:14px;height:14px}
+.fnote{margin-top:1.5rem;padding:.9rem 1.1rem;background:rgba(232,160,32,.08);border-left:3px solid var(--amber);font-size:.855rem;line-height:1.65;color:var(--mid)}
+.fsub{width:100%;margin-top:1.75rem;padding:15px;background:var(--amber);color:var(--ink);border:none;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.83rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:background .2s}
+.fsub:hover{background:var(--amberd)}
+.qsb{position:sticky;top:calc(var(--nh) + 1.5rem)}
+.sbc{background:var(--forest);padding:1.75rem;border-radius:2px;margin-bottom:.85rem}
+.sbct{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
+.sbcl{display:flex;align-items:flex-start;gap:10px;margin-bottom:.8rem;font-size:.86rem;color:rgba(247,243,238,.6);line-height:1.5}
+.sbcl svg{flex-shrink:0;margin-top:1px;color:var(--emaccent)}
+.sb-pg-link{font-size:.84rem;color:rgba(247,243,238,.45);cursor:pointer;transition:color .2s;padding:3px 0;display:block;text-align:left;width:100%}
+.sb-pg-link:hover{color:var(--amber)}
+
+/* FOOTER */
+footer{background:#070B07;padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,8vw,8rem) 2rem}
+.fg2{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(247,243,238,.07)}
+.flt{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grain);margin-bottom:.6rem}
+.flt span{color:var(--amber)}
+.flt-sub{font-family:'Barlow Condensed',sans-serif;font-weight:500;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,238,.28);margin-bottom:.85rem}
+.fld{font-size:.83rem;line-height:1.7;color:rgba(247,243,238,.32);max-width:230px}
+.fct{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(125,181,67,.65);margin-bottom:1rem}
+.fls{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.fls-btn{font-size:.86rem;color:rgba(247,243,238,.38);cursor:pointer;transition:color .2s;text-align:left;width:100%}
+.fls-btn:hover{color:var(--grain)}
+.fb{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.fbc{font-size:.76rem;color:rgba(247,243,238,.18)}
+.fbtag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(125,181,67,.28)}
+
+
+/* HOME TABS */
+.home-tabs-sec{background:var(--grain)}
+.home-tabs-hd{padding:clamp(3rem,5vw,4.5rem) clamp(1.5rem,8vw,8rem) 0}
+.tab-bar-home{display:flex;overflow-x:auto;padding:0 clamp(1.5rem,8vw,8rem);border-bottom:1px solid var(--smoke);-webkit-overflow-scrolling:touch;gap:0}
+.tbn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.87rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);padding:1rem 1.75rem 1rem 0;margin-right:.25rem;border-bottom:2px solid transparent;border-top:2px solid transparent;transition:color .2s,border-bottom-color .2s;white-space:nowrap}
+.tbn:hover{color:var(--ink)}
+.tbn.act{color:var(--amber);border-bottom-color:var(--amber)}
+.tc{display:none;padding:2rem clamp(1.5rem,8vw,8rem) clamp(3rem,5vw,4rem)}
+.tc.active{display:block;animation:fadeUp .25s ease forwards}
+.tc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tc-grid.c2{grid-template-columns:repeat(2,1fr)}
+.tc-foot{margin-top:1.5rem;display:flex;align-items:center;justify-content:flex-end;gap:1rem}
+.tc-all{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.tc-all:hover{gap:14px}
+.tc-all::after{content:'→'}
+.tc-em-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:.5rem}
+.tc-em-card{background:#fff;border:1px solid var(--smoke);border-top:3px solid var(--emaccent);padding:1.35rem;border-radius:2px}
+.tc-em-ico{width:28px;height:28px;margin-bottom:.75rem;color:var(--eml)}
+.tc-em-n{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);margin-bottom:.35rem}
+.tc-em-d{font-size:.82rem;line-height:1.6;color:var(--mid)}
+@media(max-width:900px){.tc-grid{grid-template-columns:repeat(3,1fr)}.tc-em-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.tc-grid{grid-template-columns:repeat(2,1fr)}.tc-em-grid{grid-template-columns:1fr}}
+
+/* FILE UPLOAD */
+.file-drop{border:2px dashed var(--smoke);border-radius:2px;padding:1.75rem 1.5rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--grain)}
+.file-drop:hover,.file-drop.drag-over{border-color:var(--amber);background:rgba(232,160,32,.05)}
+.file-drop-main{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.92rem;letter-spacing:.03em;color:var(--ink);margin-top:.65rem}
+.file-drop-sub{font-size:.78rem;color:var(--mid);margin-top:.25rem}
+.file-list{display:flex;flex-direction:column;gap:.45rem;margin-top:.65rem}
+.file-item{display:flex;align-items:center;padding:.55rem .85rem;background:#fff;border:1px solid var(--smoke);border-left:3px solid var(--amber);border-radius:2px;gap:.75rem}
+.file-item-ico{width:16px;height:16px;color:var(--amber);flex-shrink:0}
+.file-item-name{flex:1;font-size:.84rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.file-item-size{font-size:.74rem;color:var(--mid);flex-shrink:0}
+.file-item-rm{color:var(--mid);font-size:1.1rem;line-height:1;flex-shrink:0;transition:color .2s;padding:0 2px}
+.file-item-rm:hover{color:#c00}
+.fsub-loading{opacity:.65;cursor:wait}
+/* RESPONSIVE */
+@media(max-width:1100px){.svc-g{grid-template-columns:repeat(2,1fr)}.gal-g{grid-template-columns:repeat(3,1fr)}.qg{grid-template-columns:1fr}.qsb{position:static}.em-grid{grid-template-columns:repeat(2,1fr)}.about-strip{grid-template-columns:1fr;gap:2.5rem}}
+@media(max-width:900px){.div-cards{grid-template-columns:1fr}.feat-g{grid-template-columns:1fr 1fr}.cog{grid-template-columns:1fr}.fg2{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links{display:none}.hbg{display:flex}.svc-g{grid-template-columns:1fr}.gal-g{grid-template-columns:repeat(2,1fr)}.gal-g.c2{grid-template-columns:1fr}.fr{grid-template-columns:1fr}.fr.t{grid-template-columns:1fr 1fr}.fw{padding:1.5rem}.em-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.feat-g{grid-template-columns:1fr}.sb{flex-wrap:wrap}.si{min-width:50%;border-bottom:1px solid rgba(15,17,23,.12)}.gal-g{grid-template-columns:1fr}.fg2{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <button class="nl" onclick="go('home')">
+    <img src="images/logo/king-pallet-logo.png" alt="A. King Forest Products" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="nl-lockup" style="display:none">
+      <span class="nl-main"><span>A. King</span> Forest Products</span>
+      <span class="nl-sub">A. King Forest Products, LLC</span>
+    </div>
+  </button>
+  <ul class="nav-links">
+    <li><button class="nav-link" data-p="kp" onclick="go('kingpallet')">King Pallet Co.</button></li>
+    <li><button class="nav-link" data-p="em" onclick="go('enviromulch')">EnviroMulch</button></li>
+    <li><button class="nav-link" data-p="contact" onclick="go('contact')">Contact</button></li>
+    <li><button class="nav-link n-cta" data-p="quote" onclick="go('quote')">Get a Quote</button></li>
+  </ul>
+  <button class="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mm">
+  <button class="ml" onclick="go('home')">Home</button>
+  <div class="ml-div">Divisions</div>
+  <button class="ml" onclick="go('kingpallet')">King Pallet Co.</button>
+  <button class="ml" onclick="go('enviromulch')" style="color:var(--emaccent)">EnviroMulch</button>
+  <div class="ml-div" style="margin-top:.5rem">Company</div>
+  <button class="ml" onclick="go('contact')">Contact</button>
+  <button class="ml" onclick="go('quote')" style="color:var(--amber)">Get a Quote</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb" onclick="closeLB()">
+  <button class="lb-x" onclick="closeLB()">&#x2715;</button>
+  <img id="lbi" src="" alt="">
+</div>
+
+<!-- ======================================================= -->
+<!-- HOME — A. King Forest Products, LLC                     -->
+<!-- ======================================================= -->
+<div id="pg-home" class="page active">
+  <section class="hero-kfp">
+    <svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><pattern id="gp" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse"><path d="M0 12Q20 9 40 12Q60 15 80 12" fill="none" stroke="rgba(125,181,67,0.05)" stroke-width="1.5"/><path d="M0 28Q20 25 40 28Q60 31 80 28" fill="none" stroke="rgba(125,181,67,0.05)" stroke-width="1.5"/><path d="M0 44Q20 41 40 44Q60 47 80 44" fill="none" stroke="rgba(125,181,67,0.05)" stroke-width="1.5"/><path d="M0 60Q20 57 40 60Q60 63 80 60" fill="none" stroke="rgba(125,181,67,0.05)" stroke-width="1.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#gp)"/></svg>
+    <p class="ey">Liberty, SC &middot; Forest Products &middot; Family Owned</p>
+    <h1 class="kfp-h1">A. King<br>Forest<br><span class="am">Products</span></h1>
+    <p class="h-sub">A family-owned forest products company operating two divisions &mdash; King Pallet Company and EnviroMulch &mdash; serving industrial and landscape clients across the Southeast.</p>
+    <div class="h-btns">
+      <button class="btn btn-b" onclick="go('pallets')">Pallets</button>
+      <button class="btn btn-b" onclick="go('lumber')">Lumber</button>
+      <button class="btn btn-b" onclick="go('crating')">Crating</button>
+      <button class="btn btn-b" onclick="go('dunnage')">Dunnage</button>
+      <button class="btn btn-b" onclick="go('cutparts')">Cut Parts</button>
+      <button class="btn btn-em" onclick="go('enviromulch')">EnviroMulch</button>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <div class="sb">
+    <div class="si"><span class="sn">2</span><span class="sl">Divisions</span></div>
+    <div class="si"><span class="sn">Liberty</span><span class="sl">SC</span></div>
+    <div class="si"><span class="sn">ISPM-15</span><span class="sl">Certified HT</span></div>
+    <div class="si"><span class="sn">DOM+EXP</span><span class="sl">Domestic &amp; Export</span></div>
+    <div class="si"><span class="sn">Custom</span><span class="sl">Any Spec</span></div>
+  </div>
+
+  <!-- Division Cards -->
+  <div class="div-cards">
+    <button class="div-card div-card-kp" onclick="go('kingpallet')">
+      <img class="div-bg" src="images/pallets/pallet-26.jpg" alt="King Pallet Co.">
+      <div class="div-card-overlay"></div>
+      <div class="div-card-content">
+        <span class="div-badge div-badge-kp">Division</span>
+        <div class="div-title">King Pallet<br>Company</div>
+        <p class="div-desc">Custom pallets, crating, skids, dunnage, and lumber. Standard and engineered-to-spec. ISPM-15 certified for domestic and export shipping.</p>
+        <span class="div-link div-link-kp">View Products</span>
+      </div>
+    </button>
+    <button class="div-card div-card-em" onclick="go('enviromulch')">
+      <img class="div-bg" src="images/enviromulch/enviromulch-card.jpg" alt="EnviroMulch" style="object-position:35% 55%">
+      <div class="div-card-overlay"></div>
+      <div class="div-card-content">
+        <span class="div-badge div-badge-em">Division</span>
+        <div class="div-title">Enviro<br>Mulch</div>
+        <p class="div-desc">Landscape materials yard selling hardwood mulch, pine mulch, sand, gravel, soils, and baled straw. Serving residential and commercial landscapers.</p>
+        <span class="div-link div-link-em">Visit EnviroMulch</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- About Strip -->
+  
+  <!-- HOME TABS -->
+  <section class="home-tabs-sec">
+    <div class="home-tabs-hd">
+      <p class="sec-ey">Our Work</p>
+      <h2 class="sec-t">From the Floor</h2>
+    </div>
+    <div class="tab-bar-home">
+      <button class="tbn act" data-tab="pallets" onclick="showTab('pallets')">Pallets</button>
+      <button class="tbn" data-tab="lumber" onclick="showTab('lumber')">Lumber</button>
+      <button class="tbn" data-tab="crating" onclick="showTab('crating')">Crating</button>
+      <button class="tbn" data-tab="dunnage" onclick="showTab('dunnage')">Dunnage</button>
+      <button class="tbn" data-tab="enviromulch" onclick="showTab('enviromulch')">EnviroMulch</button>
+    </div>
+
+    <div class="tc active" id="tab-pallets">
+      <div class="tc-grid ">
+        <button class="gi" onclick="openLB('images/pallets/pallet-01.jpg')" ><img src="images/pallets/pallet-01.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/pallets/pallet-02.jpg')" ><img src="images/pallets/pallet-02.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/pallets/pallet-03.jpg')" ><img src="images/pallets/pallet-03.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/pallets/pallet-04.jpg')" ><img src="images/pallets/pallet-04.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/pallets/pallet-05.jpg')" ><img src="images/pallets/pallet-05.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/pallets/pallet-06.jpg')" ><img src="images/pallets/pallet-06.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/pallets/pallet-07.jpg')" ><img src="images/pallets/pallet-07.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/pallets/pallet-08.jpg')" ><img src="images/pallets/pallet-08.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      </div>
+      <div class="tc-foot"><button class="tc-all" onclick="go('pallets')">View all pallets</button></div>
+    </div>
+
+    <div class="tc" id="tab-lumber">
+      <div class="tc-grid ">
+        <button class="gi" onclick="openLB('images/lumber/lumber-01.jpg')"><img src="images/lumber/lumber-01.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/lumber/lumber-02.jpg')"><img src="images/lumber/lumber-02.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/lumber/lumber-03.jpg')"><img src="images/lumber/lumber-03.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/lumber/lumber-04.jpg')"><img src="images/lumber/lumber-04.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/lumber/lumber-05.jpg')"><img src="images/lumber/lumber-05.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/lumber/lumber-06.jpg')"><img src="images/lumber/lumber-06.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/lumber/lumber-07.jpg')"><img src="images/lumber/lumber-07.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/lumber/lumber-08.jpg')"><img src="images/lumber/lumber-08.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      </div>
+      <div class="tc-foot"><button class="tc-all" onclick="go('lumber')">View all lumber</button></div>
+    </div>
+
+    <div class="tc" id="tab-crating">
+      <div class="tc-grid ">
+        <button class="gi" onclick="openLB('images/crating/20190201_072201.jpg')" ><img src="images/crating/20190201_072201.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/crating/20190710_164442.jpg')" ><img src="images/crating/20190710_164442.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/crating/20190710_183439.jpg')" ><img src="images/crating/20190710_183439.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/crating/20190815_063053.jpg')" ><img src="images/crating/20190815_063053.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/crating/20190909_065948_1.jpg')" ><img src="images/crating/20190909_065948_1.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/crating/20190909_065952-1.jpg')" ><img src="images/crating/20190909_065952-1.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/crating/20200205_150652.jpg')" ><img src="images/crating/20200205_150652.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/crating/pallet_truck1.jpg')" ><img src="images/crating/pallet_truck1.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      </div>
+      <div class="tc-foot"><button class="tc-all" onclick="go('crating')">View all crating</button></div>
+    </div>
+
+    <div class="tc" id="tab-dunnage">
+      <div class="tc-grid c2">
+        <button class="gi" onclick="openLB('images/dunnage/dunnage-01.jpg')" ><img src="images/dunnage/dunnage-01.jpg" alt="" loading="lazy"><div class="go"></div></button>
+        <button class="gi" onclick="openLB('images/dunnage/dunnage-02.jpg')" ><img src="images/dunnage/dunnage-02.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      </div>
+      <div class="tc-foot"><button class="tc-all" onclick="go('dunnage')">View dunnage</button></div>
+    </div>
+
+    <div class="tc" id="tab-enviromulch">
+      <div class="tc-em-grid">
+        <div class="tc-em-card">
+          <svg class="tc-em-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".12"/><path d="M8 20C10 16 14 14 16 12C18 14 22 16 24 20" stroke="var(--eml)" stroke-width="2" stroke-linecap="round"/><path d="M12 24C13 21 14.5 19 16 18C17.5 19 19 21 20 24" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="tc-em-n">Hardwood Mulch</div>
+          <p class="tc-em-d">Double- and triple-ground hardwood for beds, paths &amp; erosion control.</p>
+        </div>
+        <div class="tc-em-card">
+          <svg class="tc-em-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".12"/><path d="M10 22L16 10L22 22" stroke="var(--eml)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18h6" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="tc-em-n">Pine Mulch</div>
+          <p class="tc-em-d">Shredded pine with a longer breakdown rate; ideal for ornamental beds.</p>
+        </div>
+        <div class="tc-em-card">
+          <svg class="tc-em-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".12"/><ellipse cx="16" cy="21" rx="8" ry="4" stroke="var(--eml)" stroke-width="1.5"/><path d="M10 21V15C10 13 12 12 16 12C20 12 22 13 22 15V21" stroke="var(--eml)" stroke-width="1.5"/></svg>
+          <div class="tc-em-n">Sand</div>
+          <p class="tc-em-d">Masonry, play &amp; fill sand sold by the scoop for concrete and drainage.</p>
+        </div>
+        <div class="tc-em-card">
+          <svg class="tc-em-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".12"/><circle cx="13" cy="17" r="3" stroke="var(--eml)" stroke-width="1.5"/><circle cx="20" cy="15" r="2.5" stroke="var(--eml)" stroke-width="1.5"/><circle cx="16" cy="21" r="2" stroke="var(--eml)" stroke-width="1.5"/></svg>
+          <div class="tc-em-n">Gravel</div>
+          <p class="tc-em-d">#57 stone, pea gravel &amp; crush-and-run for driveways and drainage.</p>
+        </div>
+        <div class="tc-em-card">
+          <svg class="tc-em-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".12"/><path d="M8 22C8 22 10 16 16 16C22 16 24 22 24 22" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="tc-em-n">Topsoil &amp; Soils</div>
+          <p class="tc-em-d">Screened topsoil and fill dirt for lawns, beds &amp; grading.</p>
+        </div>
+        <div class="tc-em-card">
+          <svg class="tc-em-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".12"/><rect x="9" y="13" width="14" height="8" rx="2" stroke="var(--eml)" stroke-width="1.5"/><path d="M12 13V11M16 13V10M20 13V11" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div class="tc-em-n">Baled Straw</div>
+          <p class="tc-em-d">Wheat straw bales for erosion control, mulching &amp; decoration.</p>
+        </div>
+      </div>
+      <div class="tc-foot"><a href="https://enviromulchonline.com" target="_blank" rel="noopener" class="tc-all">Visit enviromulchonline.com</a></div>
+    </div>
+  </section>
+
+<div class="about-strip">
+    <div>
+      <div class="about-label">About the Company</div>
+      <h2 class="about-title">A. King Forest Products</h2>
+      <p class="about-body">A. King Forest Products, LLC is a family-owned business rooted in the Upstate South Carolina forestry industry. From raw timber to finished industrial pallets and landscape materials, we operate across the full spectrum of forest product applications through our two divisions.</p>
+    </div>
+    <div class="about-details">
+      <div class="about-detail">
+        <svg class="about-detail-ico" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.243 2 5 4.243 5 7c0 4.418 5 11 5 11s5-6.582 5-11c0-2.757-2.243-5-5-5zm0 7a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <div class="about-detail-txt"><strong>Location</strong>180 Pinedale Rd., Liberty, SC 29657</div>
+      </div>
+      <div class="about-detail">
+        <svg class="about-detail-ico" viewBox="0 0 20 20" fill="none"><path d="M3 4h3.382a1 1 0 01.894.553l1.447 2.894a1 1 0 01-.275 1.176l-.857.715A11.002 11.002 0 0011.553 15.836l.715-.857a1 1 0 011.176-.275l2.894 1.447A1 1 0 0117 17v1c0 .552-.448 1-1 1C8.82 19 3 13.18 3 6V5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="about-detail-txt"><strong>Phone / Text</strong>864-350-2051</div>
+      </div>
+      <div class="about-detail">
+        <svg class="about-detail-ico" viewBox="0 0 20 20" fill="none"><path d="M3 8l7 5 7-5M3 6h14a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V7a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="about-detail-txt"><strong>Email</strong>SCwood4u@Gmail.com</div>
+      </div>
+      <div class="about-detail">
+        <svg class="about-detail-ico" viewBox="0 0 20 20" fill="none"><path d="M12 2L14.5 9L22 9.5L16.5 14.5L18.5 22L12 18L5.5 22L7.5 14.5L2 9.5L9.5 9Z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+        <div class="about-detail-txt"><strong>Certification</strong>ISPM-15 Heat Treating — International Export Compliant</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- KING PALLET CO. — Overview                             -->
+<!-- ======================================================= -->
+<div id="pg-kingpallet" class="page">
+  <div class="pgh">
+    <svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg>
+    <p class="pgbc">
+      <button class="pgbc-btn" onclick="go('home')">Home</button>
+      <span class="pgbc-sep">&rsaquo;</span>
+      King Pallet Co.
+    </p>
+    <h1 class="pgt">King Pallet<br>Company</h1>
+    <div class="pgt-sub">A Division of A. King Forest Products, LLC</div>
+    <p class="pgd">Custom pallets, crating, skids, dunnage, and lumber. We work directly with your plant personnel to design cost-effective solutions for any material handling requirement. ISPM-15 certified for domestic and export shipping.</p>
+  </div>
+  <div class="kp-sub-nav">
+    <button class="ksn act" onclick="go('kingpallet')">Overview</button>
+    <button class="ksn" onclick="go('pallets')">Pallets</button>
+    <button class="ksn" onclick="go('crating')">Crating</button>
+    <button class="ksn" onclick="go('dunnage')">Dunnage</button>
+    <button class="ksn" onclick="go('lumber')">Lumber</button>
+    <button class="ksn" onclick="go('cutparts')">Cut Parts</button>
+  </div>
+  <section class="sec">
+    <div style="margin-bottom:2.5rem">
+      <p class="sec-ey">Products &amp; Services</p>
+      <h2 class="sec-t">What We Build</h2>
+      <p class="sec-b">From standard new pallets to fully engineered custom solutions — the right product for your material handling system in any quantity.</p>
+    </div>
+    <div class="svc-g">
+      <button class="sc" onclick="go('pallets')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="2" y="8" width="36" height="7" rx="1.5" fill="currentColor"/><rect x="2" y="18" width="36" height="5" rx="1" fill="currentColor" opacity=".45"/><rect x="5" y="23" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="17" y="23" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="29" y="23" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="2" y="33" width="36" height="5" rx="1" fill="currentColor" opacity=".3"/></svg><div class="sc-n">Custom Pallets</div><p class="sc-d">Engineered to your specs — any size, species, deck pattern, and entry type.</p></button>
+      <button class="sc" onclick="go('pallets')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="2" y="6" width="36" height="6" rx="1.5" fill="currentColor"/><rect x="2" y="15" width="36" height="5" rx="1" fill="currentColor" opacity=".45"/><rect x="5" y="20" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="17" y="20" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="29" y="20" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="2" y="30" width="36" height="5" rx="1" fill="currentColor" opacity=".3"/></svg><div class="sc-n">New Pallets</div><p class="sc-d">Hardwood and SYP. Standard, reversible, and combination pallets in any size.</p></button>
+      <button class="sc" onclick="go('crating')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="3" y="3" width="34" height="34" rx="2.5" stroke="currentColor" stroke-width="2.5" fill="none"/><line x1="3" y1="15" x2="37" y2="15" stroke="currentColor" stroke-width="2"/><line x1="3" y1="25" x2="37" y2="25" stroke="currentColor" stroke-width="2"/><line x1="15" y1="3" x2="15" y2="37" stroke="currentColor" stroke-width="2"/><line x1="25" y1="3" x2="25" y2="37" stroke="currentColor" stroke-width="2"/></svg><div class="sc-n">Crating</div><p class="sc-d">Custom domestic and export crates built to exact product dimensions.</p></button>
+      <button class="sc" onclick="go('pallets')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="15" stroke="currentColor" stroke-width="2.5" fill="none"/><path d="M20 7C15 12 15 17 20 19C25 21 25 28 20 33" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><div class="sc-n">Heat Treated</div><p class="sc-d">ISPM-15 certified for international trade compliance.</p></button>
+      <button class="sc" onclick="go('dunnage')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="2" y="12" width="36" height="5" rx="1" fill="currentColor"/><rect x="2" y="21" width="36" height="5" rx="1" fill="currentColor" opacity=".6"/><rect x="2" y="30" width="36" height="5" rx="1" fill="currentColor" opacity=".3"/></svg><div class="sc-n">Dunnage</div><p class="sc-d">Blocking, bracing, and grooved boards to prevent load shift.</p></button>
+      <button class="sc" onclick="go('lumber')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="2" y="14" width="36" height="7" rx="1.5" fill="currentColor"/><rect x="2" y="24" width="36" height="5" rx="1" fill="currentColor" opacity=".55"/><rect x="2" y="32" width="36" height="4" rx="1" fill="currentColor" opacity=".25"/></svg><div class="sc-n">Custom Lumber</div><p class="sc-d">Specific cuts in hardwood and SYP for construction or industrial use.</p></button>
+      <button class="sc" onclick="go('cutparts')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="4" y="4" width="14" height="32" rx="2" fill="currentColor" opacity=".5"/><rect x="22" y="4" width="14" height="15" rx="2" fill="currentColor"/><rect x="22" y="23" width="14" height="13" rx="2" fill="currentColor" opacity=".35"/></svg><div class="sc-n">Cut Parts</div><p class="sc-d">Precision-cut wood components for pallet manufacturing and packaging.</p></button>
+      <button class="sc" onclick="go('pallets')"><svg class="sc-ico" viewBox="0 0 40 40" fill="none"><rect x="2" y="6" width="36" height="6" rx="1.5" fill="currentColor"/><rect x="2" y="15" width="16" height="5" rx="1" fill="currentColor" opacity=".38"/><rect x="22" y="15" width="16" height="5" rx="1" fill="currentColor" opacity=".9"/><rect x="5" y="20" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="17" y="20" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="29" y="20" width="6" height="10" rx="1" fill="currentColor" opacity=".65"/><rect x="2" y="30" width="36" height="5" rx="1" fill="currentColor" opacity=".3"/></svg><div class="sc-n">Combo Pallets</div><p class="sc-d">New stringers with reclaimed deck boards — cost-efficient hybrid solution.</p></button>
+    </div>
+  </section>
+  <section class="sec" style="padding-top:0">
+    <div style="margin-bottom:2rem"><p class="sec-ey">Gallery</p><h2 class="sec-t">From the Floor</h2></div>
+    <div class="feat-g feat-g5">
+      <button class="fc" onclick="go('pallets')"><img src="images/pallets/pallet-01.jpg" alt="Pallets"><div class="fo"><span class="flab">Gallery</span><div class="ftit">Pallets</div><span class="flink">View All</span></div></button>
+      <button class="fc" onclick="go('crating')"><img src="images/crating/20190201_072201.jpg" alt="Crating"><div class="fo"><span class="flab">Gallery</span><div class="ftit">Crating</div><span class="flink">View All</span></div></button>
+      <button class="fc" onclick="go('lumber')"><img src="images/lumber/lumber-01.jpg" alt="Lumber"><div class="fo"><span class="flab">Gallery</span><div class="ftit">Lumber</div><span class="flink">View All</span></div></button>
+      <button class="fc" onclick="go('dunnage')"><img src="images/dunnage/dunnage-01.jpg" alt="Dunnage"><div class="fo"><span class="flab">Gallery</span><div class="ftit">Dunnage</div><span class="flink">View All</span></div></button>
+      <button class="fc" onclick="go('cutparts')"><img src="images/cutparts/cutparts-01.jpg" alt="Cut Parts"><div class="fo"><span class="flab">Gallery</span><div class="ftit">Cut Parts</div><span class="flink">View All</span></div></button>
+    </div>
+  </section>
+  <div class="cb">
+    <div class="cb-c"><div class="cb-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9L22 9.5L16.5 14.5L18.5 22L12 18L5.5 22L7.5 14.5L2 9.5L9.5 9Z" fill="white" opacity=".9"/></svg></div><div><div class="cb-t">ISPM-15 Certified Heat Treatment</div><div class="cb-s">All wood products available with international export compliance certification</div></div></div>
+    <button class="btn btn-a" onclick="go('quote')">Request a Quote</button>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- PALLETS                                                  -->
+<!-- ======================================================= -->
+<div id="pg-pallets" class="page">
+  <div class="pgh">
+    <svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg>
+    <p class="pgbc"><button class="pgbc-btn" onclick="go('home')">Home</button><span class="pgbc-sep">&rsaquo;</span><button class="pgbc-btn" onclick="go('kingpallet')">King Pallet Co.</button><span class="pgbc-sep">&rsaquo;</span>Pallets</p>
+    <h1 class="pgt">Pallets</h1>
+    <div class="pgt-sub">King Pallet Company</div>
+    <p class="pgd">Standard and custom pallets in hardwood and SYP. Block, skid, no-bottom, 2-way, 4-way. Deck board thickness 3/8&rdquo;–1.0&rdquo;. New, combination, and ISPM-15 certified.</p>
+  </div>
+  <div class="kp-sub-nav"><button class="ksn" onclick="go('kingpallet')">Overview</button><button class="ksn act" onclick="go('pallets')">Pallets</button><button class="ksn" onclick="go('crating')">Crating</button><button class="ksn" onclick="go('dunnage')">Dunnage</button><button class="ksn" onclick="go('lumber')">Lumber</button><button class="ksn" onclick="go('cutparts')">Cut Parts</button></div>
+  <section class="gal-sec">
+    <div class="gal-g">
+      <button class="gi" onclick="openLB('images/pallets/pallet-01.jpg')"><img src="images/pallets/pallet-01.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-02.jpg')"><img src="images/pallets/pallet-02.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-03.jpg')"><img src="images/pallets/pallet-03.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-04.jpg')"><img src="images/pallets/pallet-04.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-05.jpg')"><img src="images/pallets/pallet-05.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-06.jpg')"><img src="images/pallets/pallet-06.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-07.jpg')"><img src="images/pallets/pallet-07.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-08.jpg')"><img src="images/pallets/pallet-08.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-09.jpg')"><img src="images/pallets/pallet-09.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-10.jpg')"><img src="images/pallets/pallet-10.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-11.jpg')"><img src="images/pallets/pallet-11.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-12.jpg')"><img src="images/pallets/pallet-12.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-13.jpg')"><img src="images/pallets/pallet-13.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-14.jpg')"><img src="images/pallets/pallet-14.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-15.jpg')"><img src="images/pallets/pallet-15.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-16.jpg')"><img src="images/pallets/pallet-16.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-17.jpg')"><img src="images/pallets/pallet-17.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-18.jpg')"><img src="images/pallets/pallet-18.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-19.jpg')"><img src="images/pallets/pallet-19.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-20.jpg')"><img src="images/pallets/pallet-20.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-21.jpg')"><img src="images/pallets/pallet-21.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-22.jpg')"><img src="images/pallets/pallet-22.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-23.jpg')"><img src="images/pallets/pallet-23.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-24.jpg')"><img src="images/pallets/pallet-24.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-25.jpg')"><img src="images/pallets/pallet-25.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-26.jpg')"><img src="images/pallets/pallet-26.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-27.jpg')"><img src="images/pallets/pallet-27.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-28.jpg')"><img src="images/pallets/pallet-28.jpg" alt="" loading="lazy"><div class="go"></div></button>
+      <button class="gi" onclick="openLB('images/pallets/pallet-29.jpg')"><img src="images/pallets/pallet-29.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    </div>
+  </section>
+  <div class="pg-cta"><div><div class="pct">Ready to order pallets?</div><div class="pcs">Tell us dimensions, species, quantity, and entry type.</div></div><button class="btn btn-a" onclick="go('quote')">Request a Quote</button></div>
+</div>
+
+<!-- CRATING -->
+<div id="pg-crating" class="page">
+  <div class="pgh"><svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg><p class="pgbc"><button class="pgbc-btn" onclick="go('home')">Home</button><span class="pgbc-sep">&rsaquo;</span><button class="pgbc-btn" onclick="go('kingpallet')">King Pallet Co.</button><span class="pgbc-sep">&rsaquo;</span>Crating</p><h1 class="pgt">Crating</h1><div class="pgt-sub">King Pallet Company</div><p class="pgd">Custom-built crates for domestic and export shipping. Engineered to the dimensions and requirements of your product — protecting heavy machinery, equipment, and fragile goods.</p></div>
+  <div class="kp-sub-nav"><button class="ksn" onclick="go('kingpallet')">Overview</button><button class="ksn" onclick="go('pallets')">Pallets</button><button class="ksn act" onclick="go('crating')">Crating</button><button class="ksn" onclick="go('dunnage')">Dunnage</button><button class="ksn" onclick="go('lumber')">Lumber</button><button class="ksn" onclick="go('cutparts')">Cut Parts</button></div>
+  <section class="gal-sec"><div class="gal-g c3">
+    <button class="gi" onclick="openLB('images/crating/20190201_072201.jpg')"><img src="images/crating/20190201_072201.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/crating/20190710_164442.jpg')"><img src="images/crating/20190710_164442.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/crating/20190710_183439.jpg')"><img src="images/crating/20190710_183439.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/crating/20190815_063053.jpg')"><img src="images/crating/20190815_063053.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/crating/20190909_065948_1.jpg')"><img src="images/crating/20190909_065948_1.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/crating/20190909_065952-1.jpg')"><img src="images/crating/20190909_065952-1.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/crating/20200205_150652.jpg')"><img src="images/crating/20200205_150652.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/crating/pallet_truck1.jpg')"><img src="images/crating/pallet_truck1.jpg" alt="" loading="lazy"><div class="go"></div></button>
+  </div></section>
+  <div class="pg-cta"><div><div class="pct">Need a custom crate?</div><div class="pcs">Send us dimensions, weight, and shipping destination.</div></div><button class="btn btn-a" onclick="go('quote')">Request a Quote</button></div>
+</div>
+
+<!-- DUNNAGE -->
+<div id="pg-dunnage" class="page">
+  <div class="pgh"><svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg><p class="pgbc"><button class="pgbc-btn" onclick="go('home')">Home</button><span class="pgbc-sep">&rsaquo;</span><button class="pgbc-btn" onclick="go('kingpallet')">King Pallet Co.</button><span class="pgbc-sep">&rsaquo;</span>Dunnage</p><h1 class="pgt">Dunnage</h1><div class="pgt-sub">King Pallet Company</div><p class="pgd">Custom blocking, bracing materials, and grooved boards for banding. Designed to prevent load movement and protect goods throughout transit.</p></div>
+  <div class="kp-sub-nav"><button class="ksn" onclick="go('kingpallet')">Overview</button><button class="ksn" onclick="go('pallets')">Pallets</button><button class="ksn" onclick="go('crating')">Crating</button><button class="ksn act" onclick="go('dunnage')">Dunnage</button><button class="ksn" onclick="go('lumber')">Lumber</button><button class="ksn" onclick="go('cutparts')">Cut Parts</button></div>
+  <section class="gal-sec"><div class="gal-g c2">
+    <button class="gi" onclick="openLB('images/dunnage/dunnage-01.jpg')"><img src="images/dunnage/dunnage-01.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/dunnage/dunnage-02.jpg')"><img src="images/dunnage/dunnage-02.jpg" alt="" loading="lazy"><div class="go"></div></button>
+  </div></section>
+  <div class="pg-cta"><div><div class="pct">Need custom dunnage?</div><div class="pcs">Tell us your load dimensions and shipping requirements.</div></div><button class="btn btn-a" onclick="go('quote')">Request a Quote</button></div>
+</div>
+
+<!-- LUMBER -->
+<div id="pg-lumber" class="page">
+  <div class="pgh"><svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg><p class="pgbc"><button class="pgbc-btn" onclick="go('home')">Home</button><span class="pgbc-sep">&rsaquo;</span><button class="pgbc-btn" onclick="go('kingpallet')">King Pallet Co.</button><span class="pgbc-sep">&rsaquo;</span>Lumber</p><h1 class="pgt">Lumber</h1><div class="pgt-sub">King Pallet Company</div><p class="pgd">Custom lumber services. Specific cuts and dimensions in hardwood and SYP — green or dry — for construction, packaging, or industrial use.</p></div>
+  <div class="kp-sub-nav"><button class="ksn" onclick="go('kingpallet')">Overview</button><button class="ksn" onclick="go('pallets')">Pallets</button><button class="ksn" onclick="go('crating')">Crating</button><button class="ksn" onclick="go('dunnage')">Dunnage</button><button class="ksn act" onclick="go('lumber')">Lumber</button><button class="ksn" onclick="go('cutparts')">Cut Parts</button></div>
+  <section class="gal-sec"><div class="gal-g">
+    <button class="gi" onclick="openLB('images/lumber/lumber-01.jpg')"><img src="images/lumber/lumber-01.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-02.jpg')"><img src="images/lumber/lumber-02.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-03.jpg')"><img src="images/lumber/lumber-03.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-04.jpg')"><img src="images/lumber/lumber-04.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-05.jpg')"><img src="images/lumber/lumber-05.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-06.jpg')"><img src="images/lumber/lumber-06.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-07.jpg')"><img src="images/lumber/lumber-07.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-08.jpg')"><img src="images/lumber/lumber-08.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-09.jpg')"><img src="images/lumber/lumber-09.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-10.jpg')"><img src="images/lumber/lumber-10.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-11.jpg')"><img src="images/lumber/lumber-11.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-12.jpg')"><img src="images/lumber/lumber-12.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-13.jpg')"><img src="images/lumber/lumber-13.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/lumber/lumber-14.jpg')"><img src="images/lumber/lumber-14.jpg" alt="" loading="lazy"><div class="go"></div></button>
+  </div></section>
+  <div class="pg-cta"><div><div class="pct">Need custom lumber?</div><div class="pcs">Specify dimensions, species, moisture content, and quantity.</div></div><button class="btn btn-a" onclick="go('quote')">Request a Quote</button></div>
+</div>
+
+<!-- CUT PARTS -->
+<div id="pg-cutparts" class="page">
+  <div class="pgh"><svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg><p class="pgbc"><button class="pgbc-btn" onclick="go('home')">Home</button><span class="pgbc-sep">&rsaquo;</span><button class="pgbc-btn" onclick="go('kingpallet')">King Pallet Co.</button><span class="pgbc-sep">&rsaquo;</span>Cut Parts</p><h1 class="pgt">Cut Parts</h1><div class="pgt-sub">King Pallet Company</div><p class="pgd">Precision-cut wood components for pallet manufacturing, packaging systems, and industrial applications.</p></div>
+  <div class="kp-sub-nav"><button class="ksn" onclick="go('kingpallet')">Overview</button><button class="ksn" onclick="go('pallets')">Pallets</button><button class="ksn" onclick="go('crating')">Crating</button><button class="ksn" onclick="go('dunnage')">Dunnage</button><button class="ksn" onclick="go('lumber')">Lumber</button><button class="ksn act" onclick="go('cutparts')">Cut Parts</button></div>
+  <section class="gal-sec"><div class="gal-g c3">
+    <button class="gi" onclick="openLB('images/cutparts/cutparts-01.jpg')"><img src="images/cutparts/cutparts-01.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/cutparts/cutparts-02.jpg')"><img src="images/cutparts/cutparts-02.jpg" alt="" loading="lazy"><div class="go"></div></button>
+    <button class="gi" onclick="openLB('images/cutparts/cutparts-03.jpg')"><img src="images/cutparts/cutparts-03.jpg" alt="" loading="lazy"><div class="go"></div></button>
+  </div></section>
+  <div class="pg-cta"><div><div class="pct">Need cut parts?</div><div class="pcs">Send us dimensions, quantity, and species requirements.</div></div><button class="btn btn-a" onclick="go('quote')">Request a Quote</button></div>
+</div>
+
+<!-- ======================================================= -->
+<!-- ENVIROMULCH                                              -->
+<!-- ======================================================= -->
+<div id="pg-enviromulch" class="page">
+  <section class="em-hero">
+    <svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg>
+    <p class="ey" style="color:var(--emaccent)"><span style="background:var(--emaccent);width:36px;height:2px;flex-shrink:0;display:block"></span>A Division of A. King Forest Products, LLC</p>
+    <h1 class="kfp-h1" style="font-size:clamp(3rem,9vw,8rem)">Enviro<br><span class="am" style="color:var(--emaccent)">Mulch</span></h1>
+    <p class="h-sub">Landscape materials yard serving residential and commercial clients. Hardwood mulch, pine mulch, sand, gravel, topsoil, and baled straw — available for pickup or delivery.</p>
+    <div class="h-btns">
+      <a href="https://enviromulchonline.com" target="_blank" rel="noopener" class="btn btn-em">Visit enviromulchonline.com</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div style="margin-bottom:2.5rem">
+      <p class="sec-ey green">Products</p>
+      <h2 class="sec-t">Landscape Materials</h2>
+      <p class="sec-b">Everything your landscaping project needs, sold by the scoop or in bulk. Visit our yard in Liberty, SC or order online.</p>
+    </div>
+    <div class="em-grid">
+      <div class="em-card">
+        <svg class="em-card-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".15"/><path d="M8 20C10 16 14 14 16 12C18 14 22 16 24 20" stroke="var(--eml)" stroke-width="2" stroke-linecap="round"/><path d="M12 24C13 21 14.5 19 16 18C17.5 19 19 21 20 24" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="em-card-n">Hardwood Mulch</div>
+        <p class="em-card-d">Double- and triple-ground hardwood mulch for garden beds, pathways, and erosion control. Natural dark brown color.</p>
+      </div>
+      <div class="em-card">
+        <svg class="em-card-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".15"/><path d="M10 22L16 10L22 22" stroke="var(--eml)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 18h6" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="em-card-n">Pine Mulch</div>
+        <p class="em-card-d">Shredded pine mulch with a longer decomposition rate. Excellent for acid-loving plants and ornamental beds.</p>
+      </div>
+      <div class="em-card">
+        <svg class="em-card-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".15"/><ellipse cx="16" cy="21" rx="8" ry="4" stroke="var(--eml)" stroke-width="1.5"/><path d="M10 21V15C10 13 12 12 16 12C20 12 22 13 22 15V21" stroke="var(--eml)" stroke-width="1.5"/></svg>
+        <div class="em-card-n">Sand</div>
+        <p class="em-card-d">Masonry sand, play sand, and fill sand. Sold by the scoop for concrete mixes, drainage, and leveling projects.</p>
+      </div>
+      <div class="em-card">
+        <svg class="em-card-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".15"/><circle cx="13" cy="17" r="3" stroke="var(--eml)" stroke-width="1.5"/><circle cx="20" cy="15" r="2.5" stroke="var(--eml)" stroke-width="1.5"/><circle cx="16" cy="21" r="2" stroke="var(--eml)" stroke-width="1.5"/></svg>
+        <div class="em-card-n">Gravel</div>
+        <p class="em-card-d">#57 stone, pea gravel, and crush-and-run for driveways, drainage beds, walkways, and landscaping borders.</p>
+      </div>
+      <div class="em-card">
+        <svg class="em-card-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".15"/><path d="M8 22C8 22 10 16 16 16C22 16 24 22 24 22" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/><path d="M10 22C10 22 11.5 19 16 19C20.5 19 22 22 22 22" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="em-card-n">Topsoil &amp; Soils</div>
+        <p class="em-card-d">Premium screened topsoil and fill dirt for lawn installation, garden beds, and grading projects.</p>
+      </div>
+      <div class="em-card">
+        <svg class="em-card-ico" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" fill="var(--eml)" opacity=".15"/><rect x="9" y="13" width="14" height="8" rx="2" stroke="var(--eml)" stroke-width="1.5"/><path d="M12 13V11M16 13V10M20 13V11" stroke="var(--eml)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div class="em-card-n">Baled Straw</div>
+        <p class="em-card-d">Wheat straw bales for erosion control, garden mulching, seeding cover, and fall decoration.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="em-cta-band">
+    <div>
+      <div class="em-cta-title">Shop Online or Visit the Yard</div>
+      <div class="em-cta-sub">Liberty, SC &mdash; Browse products, check prices, and order at enviromulchonline.com</div>
+    </div>
+    <a href="https://enviromulchonline.com" target="_blank" rel="noopener" class="btn btn-em">Visit EnviroMulch &rarr;</a>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- CONTACT                                                  -->
+<!-- ======================================================= -->
+<div id="pg-contact" class="page">
+  <div class="pgh"><svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg><p class="pgbc"><button class="pgbc-btn" onclick="go('home')">Home</button><span class="pgbc-sep">&rsaquo;</span>Contact Us</p><h1 class="pgt">Contact Us</h1><div class="pgt-sub">A. King Forest Products, LLC</div><p class="pgd">Reach us by phone, email, or use the quote form to get started. We&rsquo;re happy to discuss your requirements and provide competitive pricing.</p></div>
+  <section class="sec">
+    <div class="cog">
+      <div class="ccard">
+        <div class="cct">Get in Touch</div>
+        <div class="cl"><svg class="ci" viewBox="0 0 20 20" fill="none"><path d="M3 4h3.382a1 1 0 01.894.553l1.447 2.894a1 1 0 01-.275 1.176l-.857.715A11.002 11.002 0 0011.553 15.836l.715-.857a1 1 0 011.176-.275l2.894 1.447A1 1 0 0117 17v1c0 .552-.448 1-1 1C8.82 19 3 13.18 3 6V5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div class="cv"><strong>Phone / Text</strong><a href="tel:8643502051">864-350-2051</a></div></div>
+        <div class="cl"><svg class="ci" viewBox="0 0 20 20" fill="none"><path d="M3 8l7 5 7-5M3 6h14a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V7a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="cv"><strong>Sales Email</strong><a href="mailto:SCwood4u@Gmail.com">SCwood4u@Gmail.com</a></div></div>
+        <div class="cl"><svg class="ci" viewBox="0 0 20 20" fill="none"><path d="M3 8l7 5 7-5M3 6h14a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V7a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="cv"><strong>AP / Remittance</strong><a href="mailto:akingforestproducts.ap@gmail.com">akingforestproducts.ap@gmail.com</a></div></div>
+        <div class="cl"><svg class="ci" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.243 2 5 4.243 5 7c0 4.418 5 11 5 11s5-6.582 5-11c0-2.757-2.243-5-5-5zm0 7a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg><div class="cv"><strong>Manufacturing</strong>180 Pinedale Rd., Liberty, SC 29657</div></div>
+        <div class="cl"><svg class="ci" viewBox="0 0 20 20" fill="none"><path d="M3 7h14M3 11h14M3 15h14M7 3v2m6-2v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div class="cv"><strong>Mailing Address</strong>217 Pinedale Rd., Liberty, SC 29657</div></div>
+        <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--smoke)"><button class="btn btn-a" onclick="go('quote')" style="width:100%;text-align:center;display:block">Get a Quote</button></div>
+      </div>
+      <div>
+        <div class="icard">
+          <div class="ict">King Pallet Company</div>
+          <p class="icd">Custom pallets, crating, dunnage, lumber, and cut parts. ISPM-15 certified for export.</p>
+          <button class="btn btn-b" onclick="go('kingpallet')" style="margin-top:.25rem;text-align:center;display:block">View Products</button>
+        </div>
+        <div class="icard">
+          <div class="ict" style="color:var(--emaccent)">EnviroMulch</div>
+          <p class="icd">Mulch, sand, gravel, topsoil, and baled straw for landscape and construction.</p>
+          <a href="https://enviromulchonline.com" target="_blank" rel="noopener" class="btn btn-em" style="margin-top:.25rem;text-align:center;display:block">Visit Site</a>
+        </div>
+        <div class="icard">
+          <div class="ict">Employment</div>
+          <p class="icd">Hiring through Waymore Transportation. Apply online.</p>
+          <a href="https://www.waymoretrans.com/general-application.html" target="_blank" rel="noopener" class="btn btn-b" style="margin-top:.25rem;text-align:center;display:block">Apply Now</a>
+        </div>
+        <div class="icard">
+          <div class="ict">Contractor App</div>
+          <p class="icd">Interested in working with us as an independent contractor?</p>
+          <a href="https://kingpalletco.com/ContractorApp.pdf" target="_blank" rel="noopener" class="btn btn-b" style="margin-top:.25rem;text-align:center;display:block">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================= -->
+<!-- QUOTE FORM                                               -->
+<!-- ======================================================= -->
+<div id="pg-quote" class="page">
+  <div class="pgh"><svg class="grain-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="100%" height="100%" fill="url(#gp)"/></svg><p class="pgbc"><button class="pgbc-btn" onclick="go('home')">Home</button><span class="pgbc-sep">&rsaquo;</span>Quote Form</p><h1 class="pgt">Request a Quote</h1><div class="pgt-sub">King Pallet Company</div><p class="pgd">Fill out the form below and we&rsquo;ll respond with competitive pricing. For drawings or photos, email <a href="mailto:SCwood4U@gmail.com" style="color:var(--amber)">SCwood4U@gmail.com</a> or text <a href="tel:8643502051" style="color:var(--amber)">864-350-2051</a>.</p></div>
+  <section class="sec">
+    <div class="qg">
+      <div class="fw">
+        <div class="fst">Contact Information</div>
+        <div class="fr"><div class="fg"><label class="flb">Company Name</label><input class="fi" type="text" placeholder="Your Company" id="fld-company" id="fld-company"></div><div class="fg"><label class="flb">User Type</label><select class="fsel" id="fld-type"><option value="">Select&hellip;</option><option>Broker</option><option>End User</option></select></div></div>
+        <div class="fr"><div class="fg"><label class="flb">Contact Name</label><input class="fi" type="text" placeholder="Full Name" id="fld-contact" id="fld-contact"></div><div class="fg"><label class="flb">Phone</label><input class="fi" type="tel" placeholder="(XXX) XXX-XXXX" id="fld-phone" id="fld-phone"></div></div>
+        <div class="fr s"><div class="fg"><label class="flb">Email Address</label><input class="fi" type="email" placeholder="you@company.com" id="fld-email" id="fld-email"></div></div>
+        <div class="fst">Pallet Needs</div>
+        <div class="fr t"><div class="fg"><label class="flb">Length (in)</label><input class="fi" type="number" placeholder="48"  id="fld-pal-len" id="fld-pal-len"></div><div class="fg"><label class="flb">Width (in)</label><input class="fi" type="number" placeholder="40"  id="fld-pal-wid" id="fld-pal-wid"></div><div class="fg"><label class="flb">Max Weight (lbs)</label><input class="fi" type="number" placeholder="2500" id="fld-pal-wgt" id="fld-pal-wgt"></div></div>
+        <div class="fr"><div class="fg"><label class="flb">Pallet Type</label><select class="fsel" id="fld-pal-type"><option value="">Select&hellip;</option><option>Block</option><option>Skid</option><option>No Bottom</option><option>2 Way Entry</option><option>4 Way Entry</option></select></div><div class="fg"><label class="flb">ISPM-15 Heat Treating?</label><div class="rg"><label class="rl"><input type="radio" name="ht" value="yes"><span>Yes</span></label><label class="rl"><input type="radio" name="ht" value="no"><span>No</span></label></div></div></div>
+        <div class="fr"><div class="fg"><label class="flb">Stacked in Warehouse?</label><div class="rg"><label class="rl"><input type="radio" name="whs" value="no"><span>No</span></label><label class="rl"><input type="radio" name="whs" value="double"><span>Double</span></label><label class="rl"><input type="radio" name="whs" value="triple"><span>Triple</span></label><label class="rl"><input type="radio" name="whs" value="quad"><span>Quad</span></label></div></div><div class="fg"><label class="flb">Double Stacked Shipping?</label><div class="rg"><label class="rl"><input type="radio" name="dss" value="yes"><span>Yes</span></label><label class="rl"><input type="radio" name="dss" value="no"><span>No</span></label></div></div></div>
+        <div class="fr"><div class="fg"><label class="flb">Quantity Needed</label><input class="fi" type="number" placeholder="100"  id="fld-pal-qty" id="fld-pal-qty"></div><div class="fg"><label class="flb">How Often?</label><input class="fi" type="text" placeholder="e.g. Weekly, Monthly" id="fld-pal-freq" id="fld-pal-freq"></div></div>
+        <div class="fst">Lumber Needs</div>
+        <div class="fr t"><div class="fg"><label class="flb">Height (in)</label><input class="fi" type="number" placeholder="2"   id="fld-lum-h" id="fld-lum-h"></div><div class="fg"><label class="flb">Width (in)</label><input class="fi" type="number" placeholder="4"   id="fld-lum-w" id="fld-lum-w"></div><div class="fg"><label class="flb">Length (in)</label><input class="fi" type="number" placeholder="96"  id="fld-lum-l" id="fld-lum-l"></div></div>
+        <div class="fr"><div class="fg"><label class="flb">Species</label><div class="rg"><label class="rl"><input type="radio" name="sp" value="pine"><span>Pine (SYP)</span></label><label class="rl"><input type="radio" name="sp" value="hw"><span>Hardwood</span></label></div></div><div class="fg"><label class="flb">Moisture</label><div class="rg"><label class="rl"><input type="radio" name="mc" value="green"><span>Green</span></label><label class="rl"><input type="radio" name="mc" value="dry"><span>Dry (KD)</span></label></div></div></div>
+        <div class="fr"><div class="fg"><label class="flb">How Many Pieces?</label><input class="fi" type="number" placeholder="500"  id="fld-lum-qty" id="fld-lum-qty"></div><div class="fg"><label class="flb">How Often?</label><input class="fi" type="text" placeholder="e.g. One-time, Monthly" id="fld-lum-freq" id="fld-lum-freq"></div></div>
+        <div class="fst">Special Instructions</div>
+        <div class="fr s"><div class="fg"><label class="flb">Additional Notes</label><textarea class="fta" placeholder="Specific requirements, tolerances, certifications, or multiple items..." id="fld-notes"></textarea></div></div>
+        <div class="fst">Drawings &amp; Photos</div>
+        <div class="fr s">
+          <div class="fg">
+            <label class="flb">Attach Files <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--mid)">(JPG, PNG, PDF, DWG &mdash; multiple OK)</span></label>
+            <div class="file-drop" id="fileDrop">
+              <input type="file" id="fileInput" multiple
+                accept="image/*,.pdf,.dwg,.dxf,.doc,.docx"
+                onchange="handleFiles(this.files)" style="display:none">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="color:var(--smoke);margin:0 auto">
+                <rect x="4" y="8" width="24" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M16 13v7M13 16l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 8V7a2 2 0 012-2h8a2 2 0 012 2v1" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <p class="file-drop-main">Drop files here or <span style="color:var(--amber)">browse</span></p>
+              <p class="file-drop-sub">Max 10 MB per file &middot; 25 MB total</p>
+            </div>
+            <div id="fileList"></div>
+            <div id="fileError" style="display:none;color:#c00;font-size:.82rem;margin-top:.4rem"></div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div id="submitStatus" style="display:none"></div>
+        <button type="button" class="fsub" id="submitBtn" onclick="handleSubmit()">Submit Quote Request</button>
+        <p style="font-size:.78rem;color:var(--mid);margin-top:.75rem;line-height:1.55">
+          You can also email drawings to <a href="mailto:SCwood4U@gmail.com" style="color:var(--amberd)">SCwood4U@gmail.com</a> or text <a href="tel:8643502051" style="color:var(--amberd)">864-350-2051</a>.
+        </p>
+      </div>
+      <div class="qsb">
+        <div class="sbc">
+          <div class="sbct">A. King Forest Products, LLC</div>
+          <div class="sbcl"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 4h3.382a1 1 0 01.894.553l1.447 2.894a1 1 0 01-.275 1.176l-.857.715A11.002 11.002 0 0011.553 15.836l.715-.857a1 1 0 011.176-.275l2.894 1.447A1 1 0 0117 17v1c0 .552-.448 1-1 1C8.82 19 3 13.18 3 6V5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><a href="tel:8643502051" style="color:rgba(247,243,238,.6)">864-350-2051</a></div>
+          <div class="sbcl"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 8l7 5 7-5M3 6h14a1 1 0 011 1v8a1 1 0 01-1 1H3a1 1 0 01-1-1V7a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="mailto:SCwood4u@Gmail.com" style="color:rgba(247,243,238,.6)">SCwood4u@Gmail.com</a></div>
+          <div class="sbcl"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.243 2 5 4.243 5 7c0 4.418 5 11 5 11s5-6.582 5-11c0-2.757-2.243-5-5-5zm0 7a2 2 0 110-4 2 2 0 010 4z" stroke="currentColor" stroke-width="1.5"/></svg><span>180 Pinedale Rd., Liberty, SC 29657</span></div>
+        </div>
+        <div class="sbc">
+          <div class="sbct">King Pallet Co.</div>
+          <button class="sb-pg-link" onclick="go('pallets')">&#8250; Pallets</button>
+          <button class="sb-pg-link" onclick="go('crating')">&#8250; Crating</button>
+          <button class="sb-pg-link" onclick="go('dunnage')">&#8250; Dunnage</button>
+          <button class="sb-pg-link" onclick="go('lumber')">&#8250; Custom Lumber</button>
+          <button class="sb-pg-link" onclick="go('cutparts')">&#8250; Cut Parts</button>
+        </div>
+        <div class="sbc" style="border-top:2px solid var(--eml)">
+          <div class="sbct" style="color:var(--emaccent)">EnviroMulch</div>
+          <p style="font-size:.84rem;color:rgba(247,243,238,.45);line-height:1.55;margin-bottom:.85rem">Mulch, sand, gravel, topsoil &amp; baled straw.</p>
+          <a href="https://enviromulchonline.com" target="_blank" rel="noopener" style="font-size:.78rem;color:var(--emaccent);font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase">enviromulchonline.com &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg2">
+    <div>
+      <div class="flt"><span>A. King</span> Forest Products</div>
+      <div class="flt-sub">Liberty, SC 29657</div>
+      <p class="fld">Family-owned forest products company operating King Pallet Company and EnviroMulch. Serving industrial and landscape clients across the Southeast.</p>
+    </div>
+    <div>
+      <div class="fct">King Pallet Co.</div>
+      <ul class="fls">
+        <li><button class="fls-btn" onclick="go('kingpallet')">Overview</button></li>
+        <li><button class="fls-btn" onclick="go('pallets')">Pallets</button></li>
+        <li><button class="fls-btn" onclick="go('crating')">Crating</button></li>
+        <li><button class="fls-btn" onclick="go('dunnage')">Dunnage</button></li>
+        <li><button class="fls-btn" onclick="go('lumber')">Lumber</button></li>
+        <li><button class="fls-btn" onclick="go('cutparts')">Cut Parts</button></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fct">EnviroMulch</div>
+      <ul class="fls">
+        <li><button class="fls-btn" onclick="go('enviromulch')">About EnviroMulch</button></li>
+        <li><a href="https://enviromulchonline.com" target="_blank" rel="noopener" style="font-size:.86rem;color:rgba(247,243,238,.38);display:block;padding:3px 0">enviromulchonline.com</a></li>
+      </ul>
+      <div style="margin-top:1.5rem">
+        <div class="fct">Company</div>
+        <ul class="fls">
+          <li><button class="fls-btn" onclick="go('contact')">Contact Us</button></li>
+          <li><button class="fls-btn" onclick="go('quote')">Quote Form</button></li>
+          <li><a href="https://www.waymoretrans.com/general-application.html" target="_blank" rel="noopener" style="font-size:.86rem;color:rgba(247,243,238,.38);display:block;padding:3px 0">Employment</a></li>
+          <li><a href="https://kingpalletco.com/ContractorApp.pdf" target="_blank" rel="noopener" style="font-size:.86rem;color:rgba(247,243,238,.38);display:block;padding:3px 0">Contractor App</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="fct">Contact</div>
+      <ul class="fls">
+        <li><a href="tel:8643502051" style="font-size:.86rem;color:rgba(247,243,238,.38)">864-350-2051</a></li>
+        <li><a href="mailto:SCwood4u@Gmail.com" style="font-size:.86rem;color:rgba(247,243,238,.38)">SCwood4u@Gmail.com</a></li>
+        <li style="font-size:.82rem;color:rgba(247,243,238,.22);line-height:1.6;padding-top:4px">180 Pinedale Rd.<br>Liberty, SC 29657</li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">
+    <span class="fbc">&copy; 2025 A. King Forest Products, LLC. All rights reserved.</span>
+    <span class="fbtag">From the forest to your floor.</span>
+  </div>
+</footer>
+
+<script>
+var KP_PAGES=['kingpallet','pallets','crating','dunnage','lumber','cutparts'];
+function go(p){
+  var a=document.querySelectorAll('.page');
+  for(var i=0;i<a.length;i++)a[i].classList.remove('active');
+  var t=document.getElementById('pg-'+p);
+  if(t){t.classList.add('active');window.scrollTo(0,0);}
+  var l=document.querySelectorAll('.nav-link');
+  for(var j=0;j<l.length;j++)l[j].classList.remove('act');
+  var dp=KP_PAGES.indexOf(p)>=0?'kp':(p==='enviromulch'?'em':(p==='contact'?'contact':(p==='quote'?'quote':'')));
+  if(dp){var al=document.querySelector('[data-p="'+dp+'"]');if(al)al.classList.add('act');}
+  closeMM();
+}
+
+function showTab(name){
+  var tcs=document.querySelectorAll('.tc');
+  for(var i=0;i<tcs.length;i++)tcs[i].classList.remove('active');
+  var tbns=document.querySelectorAll('.tbn');
+  for(var i=0;i<tbns.length;i++)tbns[i].classList.remove('act');
+  document.getElementById('tab-'+name).classList.add('active');
+  var ab=document.querySelector('[data-tab="'+name+'"]');
+  if(ab)ab.classList.add('act');
+}
+function toggleMenu(){var m=document.getElementById('mm');var o=m.classList.toggle('open');document.body.style.overflow=o?'hidden':'';}
+function closeMM(){document.getElementById('mm').classList.remove('open');document.body.style.overflow='';}
+function openLB(s){document.getElementById('lbi').src=s;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
+function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
+
+/* ── RESEND CONFIG ─────────────────────────────────────────────────────────
+   1. Sign up at https://resend.com and verify your sending domain
+   2. Create an API key and paste it below
+   3. Update RESEND_FROM to match your verified domain
+   ─────────────────────────────────────────────────────────────────────── */
+var RESEND_KEY  = '';                  // ← your Resend API key: re_xxxxxxxxxx
+var RESEND_TO   = 'SCwood4u@Gmail.com';
+var RESEND_FROM = 'A. King Forest Products <quotes@kingforestproducts.com>';
+/* ───────────────────────────────────────────────────────────────────────── */
+
+var uploadedFiles = [];
+var MAX_FILE_BYTES  = 10 * 1024 * 1024;   // 10 MB
+var MAX_TOTAL_BYTES = 25 * 1024 * 1024;   // 25 MB
+
+function handleFiles(newFiles) {
+  var err = document.getElementById('fileError');
+  err.style.display = 'none';
+  for (var i = 0; i < newFiles.length; i++) {
+    var f = newFiles[i];
+    if (f.size > MAX_FILE_BYTES) {
+      err.textContent = f.name + ' exceeds the 10 MB limit — skipped.';
+      err.style.display = 'block'; continue;
+    }
+    // avoid duplicates by name+size
+    var dup = false;
+    for (var j = 0; j < uploadedFiles.length; j++) {
+      if (uploadedFiles[j].name === f.name && uploadedFiles[j].size === f.size) { dup = true; break; }
+    }
+    if (!dup) uploadedFiles.push(f);
+  }
+  // total size check
+  var total = uploadedFiles.reduce(function(s, f) { return s + f.size; }, 0);
+  if (total > MAX_TOTAL_BYTES) {
+    err.textContent = 'Total upload size exceeds 25 MB. Please remove some files.';
+    err.style.display = 'block';
+    uploadedFiles.pop();
+  }
+  renderFileList();
+  // reset input so same file can be re-added if removed
+  document.getElementById('fileInput').value = '';
+}
+
+function renderFileList() {
+  var list = document.getElementById('fileList');
+  list.innerHTML = '';
+  uploadedFiles.forEach(function(f, idx) {
+    var size = f.size < 1024 * 1024
+      ? Math.round(f.size / 1024) + ' KB'
+      : (f.size / 1024 / 1024).toFixed(1) + ' MB';
+    var el = document.createElement('div');
+    el.className = 'file-item';
+    el.innerHTML =
+      '<svg class="file-item-ico" viewBox="0 0 20 20" fill="none"><path d="M4 4h8l4 4v8a1 1 0 01-1 1H5a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5"/><path d="M12 4v4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>' +
+      '<span class="file-item-name">' + f.name + '</span>' +
+      '<span class="file-item-size">' + size + '</span>' +
+      '<button type="button" class="file-item-rm" onclick="removeFile(' + idx + ')" aria-label="Remove">&times;</button>';
+    list.appendChild(el);
+  });
+}
+
+function removeFile(idx) {
+  uploadedFiles.splice(idx, 1);
+  renderFileList();
+  document.getElementById('fileError').style.display = 'none';
+}
+
+// drag-and-drop wiring (runs after DOM ready)
+document.addEventListener('DOMContentLoaded', function() { initDrop(); });
+function initDrop() {
+  var zone = document.getElementById('fileDrop');
+  if (!zone) return;
+  zone.addEventListener('click', function() { document.getElementById('fileInput').click(); });
+  zone.addEventListener('dragover',  function(e) { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', function()  { zone.classList.remove('drag-over'); });
+  zone.addEventListener('drop', function(e) {
+    e.preventDefault(); zone.classList.remove('drag-over');
+    handleFiles(e.dataTransfer.files);
+  });
+}
+
+function radioVal(name) {
+  var el = document.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value : '—';
+}
+function fv(id) {
+  var el = document.getElementById(id);
+  return el && el.value.trim() ? el.value.trim() : '—';
+}
+
+function buildEmailHtml() {
+  var row = function(label, val) {
+    if (!val || val === '—') return '';
+    return '<tr><td style="padding:6px 12px 6px 0;font-size:13px;color:#666;white-space:nowrap;vertical-align:top"><strong>' + label + '</strong></td>' +
+           '<td style="padding:6px 0;font-size:13px;color:#111">' + val + '</td></tr>';
+  };
+  var section = function(title, rows) {
+    var content = rows.filter(Boolean).join('');
+    if (!content) return '';
+    return '<h3 style="font-family:sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#E8A020;margin:1.5rem 0 .5rem;padding-bottom:.4rem;border-bottom:1px solid #e5e5e5">' + title + '</h3><table style="border-collapse:collapse;width:100%">' + content + '</table>';
+  };
+
+  return [
+    '<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;background:#fff">',
+    '<div style="background:#1A2E1C;padding:20px 28px;display:flex;align-items:center">',
+    '<span style="font-family:Arial,sans-serif;font-weight:900;font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:#F7F3EE"><span style="color:#E8A020">A. King</span> Forest Products</span>',
+    '</div>',
+    '<div style="padding:24px 28px;background:#f9f9f9;border-bottom:3px solid #E8A020">',
+    '<p style="font-size:22px;font-weight:700;margin:0;color:#111">New Quote Request</p>',
+    '<p style="font-size:13px;color:#666;margin:4px 0 0">Received via kingforestproducts.com</p>',
+    '</div>',
+    '<div style="padding:24px 28px">',
+    section('Contact Information', [
+      row('Company', fv('fld-company')),
+      row('User Type', fv('fld-type')),
+      row('Name', fv('fld-contact')),
+      row('Phone', fv('fld-phone')),
+      row('Email', fv('fld-email')),
+    ]),
+    section('Pallet Needs', [
+      row('Size', fv('fld-pal-len') !== '—' ? fv('fld-pal-len') + '&Prime; &times; ' + fv('fld-pal-wid') + '&Prime;' : null),
+      row('Max Weight', fv('fld-pal-wgt') !== '—' ? fv('fld-pal-wgt') + ' lbs' : null),
+      row('Pallet Type', fv('fld-pal-type')),
+      row('ISPM-15 HT', radioVal('ht')),
+      row('Warehouse Stacking', radioVal('whs')),
+      row('Double Stacked Shipping', radioVal('dss')),
+      row('Quantity', fv('fld-pal-qty')),
+      row('Frequency', fv('fld-pal-freq')),
+    ]),
+    section('Lumber Needs', [
+      row('Size', fv('fld-lum-h') !== '—' ? fv('fld-lum-h') + '&Prime; &times; ' + fv('fld-lum-w') + '&Prime; &times; ' + fv('fld-lum-l') + '&Prime;' : null),
+      row('Species', radioVal('sp')),
+      row('Moisture', radioVal('mc')),
+      row('Pieces', fv('fld-lum-qty')),
+      row('Frequency', fv('fld-lum-freq')),
+    ]),
+    section('Notes', [ row('Additional Notes', fv('fld-notes')) ]),
+    uploadedFiles.length ? '<p style="font-size:13px;color:#666;margin-top:1.5rem"><strong>' + uploadedFiles.length + ' file(s) attached</strong>: ' + uploadedFiles.map(function(f){return f.name;}).join(', ') + '</p>' : '',
+    '</div>',
+    '<div style="padding:16px 28px;background:#f0f0f0;font-size:12px;color:#999">',
+    'A. King Forest Products, LLC &mdash; 180 Pinedale Rd., Liberty, SC 29657 &mdash; 864-350-2051',
+    '</div></div>',
+  ].join('');
+}
+
+function fileToBase64(file) {
+  return new Promise(function(resolve, reject) {
+    var r = new FileReader();
+    r.onload  = function() { resolve(r.result.split(',')[1]); };
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+function setStatus(msg, color) {
+  var el = document.getElementById('submitStatus');
+  el.style.display = 'block';
+  el.style.cssText = 'display:block;padding:.9rem 1.1rem;border-radius:2px;font-size:.88rem;line-height:1.5;margin-bottom:1rem;background:' + (color === 'ok' ? 'rgba(44,74,46,.1);border-left:3px solid var(--forestl);color:var(--forestl)' : 'rgba(192,0,0,.08);border-left:3px solid #c00;color:#900');
+  el.textContent = msg;
+}
+
+async function handleSubmit() {
+  var btn = document.getElementById('submitBtn');
+  var company = fv('fld-company');
+  var email   = fv('fld-email');
+
+  // basic validation
+  if (company === '—' || email === '—') {
+    setStatus('Please fill in at least your company name and email address.', 'err');
+    return;
+  }
+
+  if (!RESEND_KEY) {
+    setStatus('Resend API key not configured. Add your key to RESEND_KEY in the script.', 'err');
+    return;
+  }
+
+  btn.textContent = 'Sending\u2026';
+  btn.disabled = true;
+  btn.classList.add('fsub-loading');
+  document.getElementById('submitStatus').style.display = 'none';
+
+  try {
+    // Convert files to base64 attachments
+    var attachments = [];
+    for (var i = 0; i < uploadedFiles.length; i++) {
+      var b64 = await fileToBase64(uploadedFiles[i]);
+      attachments.push({ filename: uploadedFiles[i].name, content: b64 });
+    }
+
+    var payload = {
+      from: RESEND_FROM,
+      to:   [RESEND_TO],
+      reply_to: email !== '—' ? [email] : undefined,
+      subject: 'Quote Request \u2014 ' + (company !== '—' ? company : 'New Customer'),
+      html: buildEmailHtml(),
+    };
+    if (attachments.length) payload.attachments = attachments;
+
+    var res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + RESEND_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      setStatus('Quote request sent! We\u2019ll be in touch shortly.', 'ok');
+      btn.textContent = 'Sent \u2713';
+      btn.style.background = 'var(--forestl)';
+      btn.style.color = '#fff';
+      uploadedFiles = [];
+      renderFileList();
+    } else {
+      var err = await res.json().catch(function(){return {};});
+      throw new Error(err.message || 'HTTP ' + res.status);
+    }
+  } catch(e) {
+    setStatus('Send failed: ' + e.message + '. Please email SCwood4u@Gmail.com directly.', 'err');
+    btn.textContent = 'Submit Quote Request';
+    btn.disabled = false;
+    btn.classList.remove('fsub-loading');
+    btn.style.background = '';
+    btn.style.color = '';
+  }
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLB();closeMM();}});
+document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLB();});
+</script>
+</body>
+</html>
